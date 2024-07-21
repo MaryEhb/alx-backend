@@ -39,9 +39,9 @@ class Server:
         """get page content"""
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
-        page_list = []
+
         (start, end) = index_range(page, page_size)
         dataset = self.dataset()
-        page_list = dataset[start, end]
-
-        return page_list
+        if len(dataset) <= start or len(dataset) <= end:
+            return []
+        return dataset[start:end]
