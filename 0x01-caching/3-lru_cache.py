@@ -16,14 +16,12 @@ class LRUCache(BaseCaching):
         """assign to the dictionary self.cache_data the
         item value for the key key"""
         if key and item:
+            if key in self.cache_data:
+                self.cache_data.move_to_end(key)
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                if key in self.cache_data:
-                    self.cache_data.move_to_end(key)
-                else:
-                    removed = self.cache_data.popitem(last=False)
-                    print("DISCARD: {}".format(removed[0]))
+                removed = self.cache_data.popitem(last=False)
+                print("DISCARD: {}".format(removed[0]))
             self.cache_data[key] = item
-
 
     def get(self, key):
         """return the value in self.cache_data linked to key"""
