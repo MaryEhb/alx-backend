@@ -1,8 +1,8 @@
 import { createQueue } from 'kue';
 
-const job_data = {phoneNumber: 'string', message: 'string'};
+const job_data = { phoneNumber: 'string', message: 'string' };
 
-const queue = createQueue({name: 'push_notification_code'});
+const queue = createQueue({ name: 'push_notification_code' });
 const job = queue.create('push_notification_code', job_data);
 
 job.on('enqueue', () => {
